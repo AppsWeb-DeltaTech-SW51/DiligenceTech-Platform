@@ -11,7 +11,7 @@ namespace DeltaTech.DiligenceTech.API.Profiles.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class AgentController(IAgentCommandService agentCommandService, IAgentQueryService agentQueryService)
+public class AgentsController(IAgentCommandService agentCommandService, IAgentQueryService agentQueryService)
     : ControllerBase
 {
     [HttpPost]
@@ -38,7 +38,7 @@ public class AgentController(IAgentCommandService agentCommandService, IAgentQue
     {
         var getAgentByCodeQuery = new GetAgentByCodeQuery(agentCode);
         var agent = await agentQueryService.Handle(getAgentByCodeQuery);
-        if (agent == null) return NotFound();
+        if (agent is null) return NotFound();
         var agentResource = AgentResourceFromEntityAssembler.ToResourceFromEntity(agent);
         return Ok(agentResource);
     }
