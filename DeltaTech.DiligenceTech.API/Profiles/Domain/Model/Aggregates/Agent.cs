@@ -1,4 +1,6 @@
-﻿namespace DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Aggregates;
+﻿using DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Commands;
+
+namespace DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Aggregates;
 
 public class Agent
 {
@@ -16,5 +18,14 @@ public class Agent
         this.Username = username;
         this.Password = password;
         this.Image = image;
+    }
+
+    public Agent(CreateAgentCommand command)
+    {
+        this.Code = command.Code;
+        this.Email = command.Email;
+        this.Username = command.Username;
+        this.Password = command.Password;
+        this.Image = command.Image;
     }
 }
