@@ -35,3 +35,17 @@ In `NuGet`, install the dependencies
 11. `Microsoft.IdentityModel.Tokens` (7.6.0)
 12. `MySql.EntityFrameworkCore` (8.0.2)
 13. `System.IdentityModel.Tokens.Jwt` (7.6.0)
+
+## 3.
+
+##### Shared
+
+Create the following generalities in `Shared`
+
+###### Database Modelling Input
+
+- IBaseRepository
+
+##### Unit of Work
+
+1. IUnitOfWork
