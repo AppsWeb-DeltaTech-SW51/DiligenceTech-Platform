@@ -51,16 +51,18 @@
 - `IUnitOfWork`: `Shared.Domain.Repositories`
 - `UnitOfWork`: `Shared.Infrastructure.Persistence.EFC.Repositories`
 
-###### Database Modelling Input
+###### Endpoint Configuration
 
 - `ModelStateExtensions`: `Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions`
 - `StringExtensions`: `Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions`
 - `KebabCaseRouteNamingConventions`: `Shared.Infrastructure.Interfaces.ASP.Configuration`
 - `Program.cs (Changes)`: `/`
 
-###### Database Modelling Output
+###### Database Modelling
 
 - `ModelBuilderExtensions`: `Shared.Infrastructure.Persistence.EFC.Configuration.Extensions`
 - `StringExtensions`: `Shared.Infrastructure.Persistence.EFC.Configuration.Extensions`
 - `AppDbContext`: `Shared.Infrastructure.Persistence.EFC.Configuration`
 - `Program.cs (Changes)`: `/`
+
+###### Http
