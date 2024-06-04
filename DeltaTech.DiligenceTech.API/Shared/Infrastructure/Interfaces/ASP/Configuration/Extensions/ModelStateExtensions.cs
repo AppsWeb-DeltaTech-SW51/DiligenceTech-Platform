@@ -5,7 +5,7 @@ namespace DeltaTech.DiligenceTech.API.Shared.Infrastructure.Interfaces.ASP.Confi
 /**
  * <summary>
  * Extension method to get error messages from a model state dictionary.
- * Class with method to get error messages from KebabCaseRouteNamingConventions.
+ * Class with method to get error messages from KebabCaseRouteNamingConventions in a simplified way.
  * </summary>
  */
 public static class ModelStateExtensions
