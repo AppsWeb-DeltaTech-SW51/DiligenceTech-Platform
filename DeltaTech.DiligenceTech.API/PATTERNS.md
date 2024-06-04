@@ -64,5 +64,3 @@
 - `StringExtensions`: `Shared.Infrastructure.Persistence.EFC.Configuration.Extensions`
 - `AppDbContext`: `Shared.Infrastructure.Persistence.EFC.Configuration`
 - `Program.cs (Changes)`: `/`
-
-###### Http

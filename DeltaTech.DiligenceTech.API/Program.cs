@@ -39,15 +39,25 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
     c =>
     {
-        c.SwaggerDoc("v1", new OpenApiInfo()
-        {
-            Title   = "DeltaTech.DiligenceTech.API",
-            Version = "v1",
-            Description = "DiligenceTech Platform API",
-            TermsOfService = new Uri("https://diligencetech.com/tos"),
-            Contact = new OpenApiContact{ Name = "DeltaTech's DiligenceTech", Email = "contact@deltaTech.com" },
-            License = new OpenApiLicense { Name = "Apache 2.0", Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")},
-        });
+        c.SwaggerDoc("v1",
+            new OpenApiInfo()
+            {
+                Title   = "DeltaTech.DiligenceTech.API",
+                Version = "v1",
+                Description = "DiligenceTech Platform API",
+                TermsOfService = new Uri("https://diligencetech.com/tos"),
+                Contact = new OpenApiContact
+                {
+                    Name = "DeltaTech's DiligenceTech",
+                    Email = "contact@deltaTech.com"
+                },
+                License = new OpenApiLicense
+                {
+                    Name = "Apache 2.0",
+                    Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+                },
+            });
+        c.EnableAnnotations();
     });
 
 // Configure Dependency Injection
