@@ -1,4 +1,6 @@
-﻿namespace DeltaTech.DiligenceTech.API.Communication.Domain.Model.Aggregates;
+﻿using DeltaTech.DiligenceTech.API.Communication.Domain.Model.Commands;
+
+namespace DeltaTech.DiligenceTech.API.Communication.Domain.Model.Aggregates;
 
 public partial class QA
 {
@@ -17,5 +19,10 @@ public partial class QA
     {
         Question = question;
         QuestionId = question?.Id;
+    }
+
+    public QA(CreateQACommand command)
+    {
+        Content = command.content;
     }
 }
