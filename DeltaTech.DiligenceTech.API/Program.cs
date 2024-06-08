@@ -1,3 +1,8 @@
+using DeltaTech.DiligenceTech.API.Communication.Application.Internal.CommandServices;
+using DeltaTech.DiligenceTech.API.Communication.Application.Internal.QueriesServices;
+using DeltaTech.DiligenceTech.API.Communication.Domain.Repositories;
+using DeltaTech.DiligenceTech.API.Communication.Domain.Services;
+using DeltaTech.DiligenceTech.API.Communication.Infraestructure.Persistence.EFC.Repositories;
 using DeltaTech.DiligenceTech.API.Profiles.Application.Internal.CommandServices;
 using DeltaTech.DiligenceTech.API.Profiles.Application.Internal.QueryServices;
 using DeltaTech.DiligenceTech.API.Profiles.Domain.Repositories;
@@ -71,6 +76,11 @@ builder.Services.AddSwaggerGen(
 
 // Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Communications Bounded Context Injection Configuration
+builder.Services.AddScoped<IQARepository, QARepository>();
+builder.Services.AddScoped<IQACommandService, QACommandService>();
+builder.Services.AddScoped<IQAQueryService, QAQueryService>();
 
 // Profiles Bounded Context Injection Configuration
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();

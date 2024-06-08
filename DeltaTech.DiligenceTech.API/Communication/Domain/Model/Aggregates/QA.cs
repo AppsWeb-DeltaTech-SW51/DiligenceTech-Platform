@@ -24,5 +24,6 @@ public partial class QA
     public QA(CreateQACommand command)
     {
         Content = command.content;
+        QuestionId = null;
     }
 }
