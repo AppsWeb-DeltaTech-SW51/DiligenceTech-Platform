@@ -39,17 +39,17 @@ public class FolderCommandService(IFolderRepository folderRepository, IUnitOfWor
     try
     {
         // Agregar el documento al repositorio
-        await folderRepository.AddAsync(document);
+        await folderRepository.AddAsync(folder);
         await unitOfWork.CompleteAsync();
         
         // Agregar el documento a la lista de documentos de la carpeta
         folder.Documents.Add(document);
 
         // Actualizar la carpeta en el repositorio
-        await folderRepository.UpdateAsync(folder);
+        //await folderRepository.UpdateAsync(folder);
         await unitOfWork.CompleteAsync();
 
-        return document;
+        return folder;
     }
     catch (Exception e)
     {
