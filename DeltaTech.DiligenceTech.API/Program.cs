@@ -24,6 +24,16 @@ using DeltaTech.DiligenceTech.API.Shared.Infrastructure.Persistence.EFC.Configur
 using DeltaTech.DiligenceTech.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Application.CommandServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Application.QueryServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Domain.Repositories;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Domain.Services;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Infrastructure.Persistence.EFC.Repositories;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Application.Internal.CommandServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Application.Internal.QueryServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Repositories;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Services;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Infrastructure.Persistence.EFC.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -106,6 +116,16 @@ builder.Services.AddScoped<IFolderQueryService, FolderQueryService>();
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();
 builder.Services.AddScoped<IAgentCommandService, AgentCommandService>();
 builder.Services.AddScoped<IAgentQueryService, AgentQueryService>();
+
+// Projects Bounded Context Injection Configuration
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IProjectCommandService, ProjectCommandService>();
+builder.Services.AddScoped<IProjectQueryService, ProjectQueryService>();
+
+// Folder/Files Bounded Context Injection Configuration
+builder.Services.AddScoped<IFolderRepository, FolderRepository>();
+builder.Services.AddScoped<IFolderCommandService, FolderCommandService>();
+builder.Services.AddScoped<IFolderQueryService, FolderQueryService>();
 
 
 var app = builder.Build();

@@ -7,4 +7,5 @@ namespace DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Services
 public interface IFolderCommandService
 {
     Task<Folder?> Handle(CreateFolderCommand command);
+    Task<Folder?> Handle(CreateDocumentCommand command);
 }

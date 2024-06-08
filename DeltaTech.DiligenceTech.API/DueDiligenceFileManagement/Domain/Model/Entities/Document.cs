@@ -1,29 +1,36 @@
-﻿using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Aggregates;
-using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.ValueObjects;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Aggregates;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Commands;
+using EntityFrameworkCore.CreatedUpdatedDate.Contracts;
 
 namespace DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Entities;
 
 public partial class Document
-{
+{ 
+    public int Id {get;}
+    public int folder_Id {get; private set;}
+    public string file_Name {get; private set;}
+    public string file_Url {get; private set;}
+
+    public Folder Folder {get; private set;}
 
     public Document()
     {
-        FileInfo = new ValueObjects.FileInfo();
+        folder_Id = 0;
+        file_Name = "";
+        file_Url = "";
     }
     
-    public Document(string fileName, string fileUrl, int folderId)
+    public Document(int folderId, string fileName, string fileUrl)
     {
-        FileInfo = new ValueObjects.FileInfo(fileName, fileUrl);
-        FolderId = folderId;
+        folder_Id = folderId;
+        file_Name = fileName;
+        file_Url = fileUrl;
     }
     
-    public int Id { get; }
-    public ValueObjects.FileInfo FileInfo { get; private set; }
-    
-    public Folder Folder { get; set; }
-    public int FolderId { get; private set; }
-
-    public string FileName => FileInfo.FileName;
-
-    public string FileUrl => FileInfo.FileUrl;
+    public Document(CreateDocumentCommand command) {
+        folder_Id = command.folderId;
+        file_Name = command.fileName;
+        file_Url = command.fileUrl;
+    }
 }

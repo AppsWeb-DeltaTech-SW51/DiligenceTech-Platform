@@ -1,6 +1,8 @@
-﻿using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Commands;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Commands;
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Entities;
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.ValueObjects;
+using EntityFrameworkCore.CreatedUpdatedDate.Contracts;
 
 namespace DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Aggregates;
 
@@ -17,8 +19,6 @@ public partial class Folder
     
     public int? ParentId { get; private set; }
     
-    public ICollection<Folder> Children { get; }
-    
     public ICollection<Document> Documents { get; }
 
     public Folder(string name, EFolderStatus buyStatus, EFolderStatus sellStatus, bool obligatory, EFolderPriority priority)
@@ -28,6 +28,7 @@ public partial class Folder
         SellStatus = sellStatus;
         Obligatory = obligatory;
         Priority = priority;
+        Documents = new List<Document>();
     }
     
     public void AssignParent(Folder parent)
@@ -43,5 +44,6 @@ public partial class Folder
         SellStatus = command.SellStatus;
         Obligatory = command.Obligatory;
         Priority = command.Priority;
+        Documents = new List<Document>();
     }
 }

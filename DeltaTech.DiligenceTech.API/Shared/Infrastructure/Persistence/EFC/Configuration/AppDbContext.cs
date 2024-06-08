@@ -40,25 +40,17 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Folder>().Property(f => f.SellStatus).IsRequired();
         builder.Entity<Folder>().Property(f => f.Obligatory).IsRequired();
         builder.Entity<Folder>().Property(f => f.Priority).IsRequired();
-        builder.Entity<Folder>().HasMany(f1 => f1.Children)
-            .WithOne(f2 => f2.Parent)
-            .HasForeignKey(f2 => f2.ParentId)
-            .HasPrincipalKey(f1 => f1.Id);
-        
         builder.Entity<Folder>().HasMany(f => f.Documents)
             .WithOne(d => d.Folder)
-            .HasForeignKey(d => d.FolderId)
+            .HasForeignKey(d => d.folder_Id)
             .HasPrincipalKey(f => f.Id);
 
         builder.Entity<Document>().HasKey(d => d.Id);
         builder.Entity<Document>().Property(d => d.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Document>().OwnsOne(d => d.FileInfo,
-            f =>
-            {
-                f.WithOwner().HasForeignKey("Id");
-                f.Property(d => d.FileName).HasColumnName("FileName");
-                f.Property(d => d.FileUrl).HasColumnName("FileUrl");
-            });
+        builder.Entity<Document>().Property(d => d.folder_Id).IsRequired();
+        builder.Entity<Document>().Property(d => d.file_Name).IsRequired();
+        builder.Entity<Document>().Property(d => d.file_Url).IsRequired();
+
         
         // Profiles Context
         builder.Entity<Agent>().HasKey(a => a.Id);

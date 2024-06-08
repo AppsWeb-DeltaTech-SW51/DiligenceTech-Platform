@@ -7,6 +7,6 @@ public static class ProjectResourceFromEntityAssembler
 {
     public static ProjectResource ToResourceFromEntity(Project entity)
     {
-        return new ProjectResource(entity.Code, entity.Name, entity.CreatedDate.ToString() == null ? "" : entity.CreatedDate.ToString(), entity.UpdatedDate.ToString() == null ? "" : entity.UpdatedDate.ToString());
+        return new ProjectResource(entity.Code, entity.Name, entity.Confirmed);
     }
 }
