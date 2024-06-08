@@ -5,12 +5,12 @@ namespace DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Interfaces.R
 
 public static class CreateProjectCommandFromResourceAssembler
 {
-    public static CreateProjectCommand ToCommandFromResourceConfirmed(ProjectResource resource)
+    public static CreateProjectCommand ToCommandFromResourceConfirmed(CreateProjectResource resource)
     {
         return new CreateProjectCommand(resource.Id, resource.Name, true);
     }
     
-    public static CreateProjectCommand ToCommandFromResourcePending(ProjectResource resource)
+    public static CreateProjectCommand ToCommandFromResourcePending(CreateProjectResource resource)
     {
         return new CreateProjectCommand(resource.Id, resource.Name, false);
     }

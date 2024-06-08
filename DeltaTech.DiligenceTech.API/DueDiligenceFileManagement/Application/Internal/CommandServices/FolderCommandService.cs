@@ -35,27 +35,7 @@ public class FolderCommandService(IFolderRepository folderRepository, IUnitOfWor
 
     // Crear el documento
     var document = new Document(command);
-
-    try
-    {
-        // Agregar el documento al repositorio
-        await folderRepository.AddAsync(document);
-        await unitOfWork.CompleteAsync();
-        
-        // Agregar el documento a la lista de documentos de la carpeta
-        folder.Documents.Add(document);
-
-        // Actualizar la carpeta en el repositorio
-        await folderRepository.UpdateAsync(folder);
-        await unitOfWork.CompleteAsync();
-
-        return document;
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine($"An error occurred while creating the document: {e.Message}");
-        throw; // Re-lanzar la excepción
-    }
+    return null;
  }
 }
 
