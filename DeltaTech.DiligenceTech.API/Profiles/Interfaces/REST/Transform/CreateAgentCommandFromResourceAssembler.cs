@@ -7,7 +7,6 @@ public static class CreateAgentCommandFromResourceAssembler
 {
     public static CreateAgentCommand ToCommandFromResource(AgentResource resource)
     {
-        return new CreateAgentCommand(resource.Id, resource.Email, resource.Username, resource.Password,
-            resource.Image);
+        return new CreateAgentCommand(resource.agentCode, resource.Email, resource.Username, resource.Password, resource.Image);
     }
 }

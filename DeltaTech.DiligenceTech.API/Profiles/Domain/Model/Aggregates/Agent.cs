@@ -1,8 +1,10 @@
-﻿using DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Commands;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Commands;
+using EntityFrameworkCore.CreatedUpdatedDate.Contracts;
 
 namespace DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Aggregates;
 
-public class Agent
+public partial class Agent
 {
     public int Id { get; }
     public string Code { get; private set; }

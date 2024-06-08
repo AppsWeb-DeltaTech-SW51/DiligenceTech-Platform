@@ -1,5 +1,4 @@
 ﻿using System.Net.Mime;
-using DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Commands;
 using DeltaTech.DiligenceTech.API.Profiles.Domain.Model.Queries;
 using DeltaTech.DiligenceTech.API.Profiles.Domain.Services;
 using DeltaTech.DiligenceTech.API.Profiles.Interfaces.REST.Resources;
@@ -9,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DeltaTech.DiligenceTech.API.Profiles.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/agents")]
 [Produces(MediaTypeNames.Application.Json)]
 public class AgentsController(IAgentCommandService agentCommandService, IAgentQueryService agentQueryService)
     : ControllerBase
@@ -21,7 +20,9 @@ public class AgentsController(IAgentCommandService agentCommandService, IAgentQu
         var agent = await agentCommandService.Handle(createAgentCommand);
         if (agent is null) return BadRequest();
         var agentResource = AgentResourceFromEntityAssembler.ToResourceFromEntity(agent);
-        return CreatedAtAction(nameof(GetAgentByCode), agentResource);
+        
+        // Proporciona el valor del parámetro "agentCode" para CreatedAtAction
+        return CreatedAtAction(nameof(GetAgentByCode), new { agentCode = agent.Code }, agentResource);
     }
 
     [HttpGet]
