@@ -1,5 +1,12 @@
+using DeltaTech.DiligenceTech.API.Profiles.Application.Internal.CommandServices;
+using DeltaTech.DiligenceTech.API.Profiles.Application.Internal.QueryServices;
+using DeltaTech.DiligenceTech.API.Profiles.Domain.Repositories;
+using DeltaTech.DiligenceTech.API.Profiles.Domain.Services;
+using DeltaTech.DiligenceTech.API.Profiles.Infrastructure.Persistence.EFC.Repositories;
+using DeltaTech.DiligenceTech.API.Shared.Domain.Repositories;
 using DeltaTech.DiligenceTech.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using DeltaTech.DiligenceTech.API.Shared.Infrastructure.Persistence.EFC.Configuration;
+using DeltaTech.DiligenceTech.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -61,6 +68,15 @@ builder.Services.AddSwaggerGen(
     });
 
 // Configure Dependency Injection
+
+// Shared Bounded Context Injection Configuration
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Profiles Bounded Context Injection Configuration
+builder.Services.AddScoped<IAgentRepository, AgentRepository>();
+builder.Services.AddScoped<IAgentCommandService, AgentCommandService>();
+builder.Services.AddScoped<IAgentQueryService, AgentQueryService>();
+
 
 var app = builder.Build();
 
