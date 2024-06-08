@@ -3,6 +3,16 @@ using DeltaTech.DiligenceTech.API.Communication.Application.Internal.QueriesServ
 using DeltaTech.DiligenceTech.API.Communication.Domain.Repositories;
 using DeltaTech.DiligenceTech.API.Communication.Domain.Services;
 using DeltaTech.DiligenceTech.API.Communication.Infraestructure.Persistence.EFC.Repositories;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Application.Internal.CommandServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Application.Internal.QueryServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Repositories;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Services;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Infrastructure.Persistence.EFC.Repositories;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Application.CommandServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Application.QueryServices;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Domain.Repositories;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Domain.Services;
+using DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Infrastructure.Persistence.EFC.Repositories;
 using DeltaTech.DiligenceTech.API.Profiles.Application.Internal.CommandServices;
 using DeltaTech.DiligenceTech.API.Profiles.Application.Internal.QueryServices;
 using DeltaTech.DiligenceTech.API.Profiles.Domain.Repositories;
@@ -81,6 +91,16 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IQARepository, QARepository>();
 builder.Services.AddScoped<IQACommandService, QACommandService>();
 builder.Services.AddScoped<IQAQueryService, QAQueryService>();
+
+// Projects Bounded Context Injection Configuration
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IProjectCommandService, ProjectCommandService>();
+builder.Services.AddScoped<IProjectQueryService, ProjectQueryService>();
+
+// File Management Bounded Context Injection Configuration
+builder.Services.AddScoped<IFolderRepository, FolderRepository>();
+builder.Services.AddScoped<IFolderCommandService, FolderCommandService>();
+builder.Services.AddScoped<IFolderQueryService, FolderQueryService>();
 
 // Profiles Bounded Context Injection Configuration
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();

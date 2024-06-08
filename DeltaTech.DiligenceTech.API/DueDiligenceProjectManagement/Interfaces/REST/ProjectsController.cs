@@ -14,9 +14,9 @@ public class ProjectsController(IProjectCommandService projectCommandService, IP
     : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> CreateProject(ProjectResource resource)
+    public async Task<IActionResult> CreateProject(CreateProjectResource resource)
     {
-        var createProjectCommand = CreateProjectCommandFromResourceAssembler.ToCommandFromResourceConfirmed(resource);
+        var createProjectCommand = CreateProjectCommandFromCreateResourceAssembler.ToCommandFromResourceConfirmed(resource);
         var project = await projectCommandService.Handle(createProjectCommand);
         if (project is null) return BadRequest();
         var projectResource = ProjectResourceFromEntityAssembler.ToResourceFromEntity(project);
