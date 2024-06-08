@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DeltaTech.DiligenceTech.API.DueDiligenceProjectManagement.Interfaces.REST;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/projects")]
 [Produces(MediaTypeNames.Application.Json)]
 public class ProjectsController(IProjectCommandService projectCommandService, IProjectQueryService projectQueryService)
     : ControllerBase
@@ -19,9 +19,13 @@ public class ProjectsController(IProjectCommandService projectCommandService, IP
         var createProjectCommand = CreateProjectCommandFromResourceAssembler.ToCommandFromResourceConfirmed(resource);
         var project = await projectCommandService.Handle(createProjectCommand);
         if (project is null) return BadRequest();
+        
         var projectResource = ProjectResourceFromEntityAssembler.ToResourceFromEntity(project);
-        return CreatedAtAction(nameof(GetProjectByCode), projectResource);
+        
+        // Aquí debes asegurarte de pasar el código del proyecto recién creado
+        return CreatedAtAction(nameof(GetProjectByCode), new { projectCode = project.Code }, projectResource);
     }
+
 
     [HttpGet]
     public async Task<IActionResult> GetAllProjects()
