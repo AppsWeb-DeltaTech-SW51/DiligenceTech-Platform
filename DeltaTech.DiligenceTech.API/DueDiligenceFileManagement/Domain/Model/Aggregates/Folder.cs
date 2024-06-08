@@ -1,4 +1,5 @@
-﻿using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Entities;
+﻿using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Commands;
+using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Entities;
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.ValueObjects;
 
 namespace DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Aggregates;
@@ -33,5 +34,14 @@ public partial class Folder
     {
         Parent = parent;
         ParentId = parent?.Id;
+    }
+
+    public Folder(CreateFolderCommand command)
+    {
+        Name = command.Name;
+        BuyStatus = command.BuyStatus;
+        SellStatus = command.SellStatus;
+        Obligatory = command.Obligatory;
+        Priority = command.Priority;
     }
 }
