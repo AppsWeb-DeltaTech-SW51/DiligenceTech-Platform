@@ -53,9 +53,9 @@
 
 ###### Endpoint Configuration
 
-- `ModelStateExtensions`: `Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions`
-- `StringExtensions`: `Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions`
-- `KebabCaseRouteNamingConventions`: `Shared.Infrastructure.Interfaces.ASP.Configuration`
+- `ModelStateExtensions`: `Shared.Interfaces.ASP.Configuration.Extensions`
+- `StringExtensions`: `Shared.Interfaces.ASP.Configuration.Extensions`
+- `KebabCaseRouteNamingConventions`: `Shared.Interfaces.ASP.Configuration`
 - `Program.cs (Changes)`: `/`
 
 ###### Database Modelling
