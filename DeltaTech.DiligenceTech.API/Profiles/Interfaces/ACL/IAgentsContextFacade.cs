@@ -2,7 +2,7 @@
 
 public interface IAgentsContextFacade
 {
-    Task<int> CreateAgent(string code, string email, string username, string password, string image);
+    Task<string> CreateAgent(string code, string email, string username, string password, string image);
 
-    Task<int> FetchAgentIdByCode(string code);
+    Task<string> FetchAgentIdByCode(string code);
 }

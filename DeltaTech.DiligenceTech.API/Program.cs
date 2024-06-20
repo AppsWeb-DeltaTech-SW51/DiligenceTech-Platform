@@ -46,6 +46,8 @@ using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Application.Interna
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Repositories;
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Services;
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Infrastructure.Persistence.EFC.Repositories;
+using DeltaTech.DiligenceTech.API.Profiles.Interfaces.ACL;
+using DeltaTech.DiligenceTech.API.Profiles.Interfaces.ACL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -161,6 +163,7 @@ builder.Services.AddScoped<IFolderQueryService, FolderQueryService>();
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();
 builder.Services.AddScoped<IAgentCommandService, AgentCommandService>();
 builder.Services.AddScoped<IAgentQueryService, AgentQueryService>();
+builder.Services.AddScoped<IAgentsContextFacade, AgentsContextFacade>();
 
 // Projects Bounded Context Injection Configuration
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
