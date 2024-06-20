@@ -1,3 +1,15 @@
+using DeltaTech.DiligenceTech.API.IAM.Application.Internal.CommandServices;
+using DeltaTech.DiligenceTech.API.IAM.Application.Internal.OutboundServices;
+using DeltaTech.DiligenceTech.API.IAM.Application.Internal.QueryServices;
+using DeltaTech.DiligenceTech.API.IAM.Domain.Repositories;
+using DeltaTech.DiligenceTech.API.IAM.Domain.Services;
+using DeltaTech.DiligenceTech.API.IAM.Infrastructure.Hashing.BCrypt.Services;
+using DeltaTech.DiligenceTech.API.IAM.Infrastructure.Persistence.EFC.Repositories;
+using DeltaTech.DiligenceTech.API.IAM.Infrastructure.Pipeline.Middleware.Extensions;
+using DeltaTech.DiligenceTech.API.IAM.Infrastructure.Tokens.JWT.Configuration;
+using DeltaTech.DiligenceTech.API.IAM.Infrastructure.Tokens.JWT.Services;
+using DeltaTech.DiligenceTech.API.IAM.Interfaces.ACL;
+using DeltaTech.DiligenceTech.API.IAM.Interfaces.ACL.Services;
 using DeltaTech.DiligenceTech.API.Communication.Application.Internal.CommandServices;
 using DeltaTech.DiligenceTech.API.Communication.Application.Internal.QueriesServices;
 using DeltaTech.DiligenceTech.API.Communication.Domain.Repositories;
@@ -46,6 +58,16 @@ builder.Services.AddControllers(options => options.Conventions.Add(new KebabCase
 // Configure Lowercase URLs
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
+// Add CORS Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowedAllPolicy",
+        policy => policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 // Add Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -90,6 +112,29 @@ builder.Services.AddSwaggerGen(
                 },
             });
         c.EnableAnnotations();
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "JoaquinRivadeneyraLuisHerrerAyuwoki+123",
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            BearerFormat = "JWT",
+            Scheme = "bearer"
+        });
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme
+                    }
+                },
+                Array.Empty<string>()
+            } 
+        });
     });
 
 // Configure Dependency Injection
@@ -127,6 +172,14 @@ builder.Services.AddScoped<IFolderRepository, FolderRepository>();
 builder.Services.AddScoped<IFolderCommandService, FolderCommandService>();
 builder.Services.AddScoped<IFolderQueryService, FolderQueryService>();
 
+// IAM Bounded Context Injection Configuration
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IHashingService, HashingService>();
+builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
 
 var app = builder.Build();
 
@@ -145,6 +198,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Apply CORS Policy
+app.UseCors("AllowedAllPolicy");
+
+// Add Authorization Middleware to the Request Pipeline
+
+app.UseRequestAuthorization();
 
 app.UseHttpsRedirection();
 

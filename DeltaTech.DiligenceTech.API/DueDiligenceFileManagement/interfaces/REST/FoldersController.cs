@@ -6,7 +6,7 @@ using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.interfaces.REST.Tra
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Commands;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ACME.LearningCenterPlatform.API.Profiles.Interfaces.REST;
+namespace DeltaTech.DiligenceTech.API.Profiles.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/folders")]

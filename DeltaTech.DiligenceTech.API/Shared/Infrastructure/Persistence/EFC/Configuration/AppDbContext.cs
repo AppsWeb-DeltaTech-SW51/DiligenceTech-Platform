@@ -1,4 +1,5 @@
-﻿using DeltaTech.DiligenceTech.API.Communication.Domain.Model.Aggregates;
+﻿using DeltaTech.DiligenceTech.API.IAM.Domain.Model.Aggregates;
+using DeltaTech.DiligenceTech.API.Communication.Domain.Model.Aggregates;
 using DeltaTech.DiligenceTech.API.Communication.Domain.Model.Entities;
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Aggregates;
 using DeltaTech.DiligenceTech.API.DueDiligenceFileManagement.Domain.Model.Entities;
@@ -74,6 +75,12 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Notification>().Property(n => n.Type);
         builder.Entity<Notification>().Property(n => n.Content);
+        
+        // IAM Context
+        builder.Entity<User>().HasKey(u => u.Id);
+        builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(u => u.Username).IsRequired();
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         
         // Applying Snake Case Naming Convention
         builder.UseSnakeCaseWithPluralizedTableNamingConvention();
